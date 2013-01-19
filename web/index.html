@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>NFL Play-by-Play Effectiveness | 10flow</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+  <link rel="stylesheet" href="stylesheets/jquery.jqplot.min.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+  <link rel="apple-touch-icon" href="/touchicon.png" />
+</head>
+<body>
+
+  <div class="row">
+    <div class="nine columns">
+      <h2>NFL Play-by-Play Effectiveness<br /><small>beta</small></h2>
+    </div>
+    <div class="three columns">
+      <p><a href="http://www.10flow.com/"><img src="logo.png"></a><br /><a href="http://www.10flow.com/tag/football">about this site</a></p>
+    </div>
+  </div>
+
+  <div class="row">
+  <!-- Filter Plays -->
+  <div class="nine columns">
+  <form>
+  <fieldset><legend>Filter By</legend>
+      <div class="row">
+        <div class="six columns">
+          <label for="from">From Season</label>            
+          <select id="from">
+            <option SELECTED>2012</option>
+            <option>2011</option>
+            <option>2010</option>
+            <option>2009</option>
+            <option>2008</option>
+            <option>2007</option>
+            <option>2006</option>
+            <option>2005</option>
+            <option>2004</option>
+            <option>2003</option>
+            <option>2002</option>
+          </select>
+          
+        </div>
+        <div class="six columns">
+          <label for="to">To Season</label>            
+          <select id="to">
+            <option SELECTED>2012</option>
+            <option>2011</option>
+            <option>2010</option>
+            <option>2009</option>
+            <option>2008</option>
+            <option>2007</option>
+            <option>2006</option>
+            <option>2005</option>
+            <option>2004</option>
+            <option>2003</option>
+            <option>2002</option>
+          </select>
+        </div>         
+      </div>
+      <div class="row">
+       <div class="six columns">
+          <label for="off">Offense</label>            
+          <select id="off">
+            <option value=0 SELECTED>All Teams</option>
+<option>ARI</option>
+<option>ATL</option>
+<option>BAL</option>
+<option>BUF</option>
+<option>CAR</option>
+<option>CHI</option>
+<option>CIN</option>
+<option>CLE</option>
+<option>DAL</option>
+<option>DEN</option>
+<option>DET</option>
+<option>GB</option>
+<option>HOU</option>
+<option>IND</option>
+<option>JAC</option>
+<option>KC</option>
+<option>MIA</option>
+<option>MIN</option>
+<option>NE</option>
+<option>NO</option>
+<option>NYG</option>
+<option>NYJ</option>
+<option>OAK</option>
+<option>PHI</option>
+<option>PIT</option>
+<option>SD</option>
+<option>SEA</option>
+<option>SF</option>
+<option>STL</option>
+<option>TB</option>
+<option>TEN</option>
+<option>WAS</option>
+          </select>
+          
+        </div>
+        <div class="six columns">
+          <label for="def">Defense</label>            
+          <select id="def">
+            <option value=0 SELECTED>All Teams</option>
+<option>ARI</option>
+<option>ATL</option>
+<option>BAL</option>
+<option>BUF</option>
+<option>CAR</option>
+<option>CHI</option>
+<option>CIN</option>
+<option>CLE</option>
+<option>DAL</option>
+<option>DEN</option>
+<option>DET</option>
+<option>GB</option>
+<option>HOU</option>
+<option>IND</option>
+<option>JAC</option>
+<option>KC</option>
+<option>MIA</option>
+<option>MIN</option>
+<option>NE</option>
+<option>NO</option>
+<option>NYG</option>
+<option>NYJ</option>
+<option>OAK</option>
+<option>PHI</option>
+<option>PIT</option>
+<option>SD</option>
+<option>SEA</option>
+<option>SF</option>
+<option>STL</option>
+<option>TB</option>
+<option>TEN</option>
+<option>WAS</option>
+          </select>
+        </div>         
+      </div>
+      
+      <div class="row">
+        <div class="twelve columns">
+          <label for="time">Part of Game</label>            
+          <select id="time">
+            <option value=0 SELECTED>Entire Game</option>
+            <option value=1>First Half</option>
+            <option value=2>Second Half</option>
+            <option value=3>Last 5 Minutes</option>
+            <option value=4>Last 2 Minutes</option>
+            <option value=5>Overtime (OT)</option>
+          </select>
+        </div> 
+      </div>
+      
+      <div class="row">
+        <div class="twelve columns">
+          <label for="score">Score Differential</label>            
+          <select id="score">
+            <option value=0 SELECTED>All Scores</option>
+            <option value=1>Offense up 1-8 points</option>
+            <option value=2>Offense up 9-16 points</option>
+            <option value=3>Offense up 17+ points</option>
+            <option value=4>Defense up 1-8 points</option>
+            <option value=5>Defense up 9-16 points</option>
+            <option value=6>Defense up 17+ points</option>
+            <option value=7>Score Tied</option>
+          </select>
+        </div> 
+      </div>
+      
+      <div class="row">
+       <div class="six columns">
+          <label for="down">Down</label>            
+          <select id="down">
+            <option value=0 SELECTED>All Downs</option>
+            <option value=1>1st Down</option>
+            <option value=2>2nd Down</option>
+            <option value=3>3rd Down</option>
+            <option value=4>4th Down</option>
+          </select>
+          
+        </div>
+        <div class="six columns">
+          <label for="togo">Yards To Go</label>            
+          <select id="togo">
+            <option value=0 SELECTED>All Yards</option>
+            <option value=1>11+</option>
+            <option value=2>10</option>
+            <option value=3>5-10</option>
+            <option value=4>1-5</option>
+            <option value=5>1-2</option>
+            <option value=6>1</option>
+          </select>
+        </div>         
+      </div>
+      <div class="row"><div class="twelve columns">
+        <label for="name">Name This Dataset</label>
+        <input id="name" type="text" placeholder="e.g. NFL Average 2012" />
+      </div></div>
+  </fieldset></form>
+  <button class="button" onclick="go()" id="go-button">Filter</button>
+  <div id="content">
+      
+  </div>
+  
+  <p>Percent differentials are compared to all teams, all plays and all drives in the 2012 regular season.</p>
+
+  </div>
+  
+  <div class="three columns">
+  <h4>Stat Definitions & Notes</h4>
+<h5>Successful Play</h5>
+<p>A successful play meets one or more of these conditions:</p>
+<ul><li>Earns a first down;</li>
+<li>Scores a touchdown;</li>
+<li>For 1st and 2nd down plays, gains at least 4 yards;</li></ul>
+<p>and a successful play cannot result in a turnover, punt, or loss.
+
+<h5>Comparison Numbers</h5>
+<p>The numbers next to play and drive statistics compare your filtered query with NFL average for 2012. The difference shown is in <a href="http://en.wikipedia.org/wiki/Percentage_point">percentage points</a> -- it is not the percent difference between the two numbers.</p>
+
+<h5>Other Notes</h5>
+<ul><li>Incomplete passes count as pass plays that gain zero yards</li>
+<li>Sacks count as pass plays for negative yards</li>
+<li>Play selection percentages only include plays that have deemed a run or pass play (i.e. special teams plays are not included)</li>
+<li>For drive statistics, each drive is assigned only one result. If more than one category applies (e.g. a touchdown and a win), the scoring event takes precedence.</li></ul>
+
+<p>This database is derived from the <a target="_blank" href="http://www.advancednflstats.com/2010/04/play-by-play-data.html">AdvancedNFLStats.com play-by-play dataset</a>, which contains play data through the 2012 regular season. 
+All subsequent processing is automated and has not been verified for accuracy. 
+I make no guarantee that these stats are accurate -- use at your own risk!</p>
+  </div>
+  
+  </div>
+  
+  <div class="row"><div class="twelve columns">
+  <hr /><p>Web application developed by <a href="http://www.10flow.com/">Scott Sawyer</a>. This service is provided "as is" with absolutely no warranty expressed or implied. Any use is at your own risk. v0.2</p>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+  </div></div>
+
+  
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  <script src="javascripts/jquery.js"></script><script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script><script src="javascripts/jquery.foundation.forms.js"></script><script src="javascripts/jquery.foundation.reveal.js"></script><script src="javascripts/jquery.foundation.orbit.js"></script><script src="javascripts/jquery.foundation.navigation.js"></script><script src="javascripts/jquery.foundation.buttons.js"></script><script src="javascripts/jquery.foundation.tabs.js"></script><script src="javascripts/jquery.foundation.tooltips.js"></script><script src="javascripts/jquery.foundation.accordion.js"></script><script src="javascripts/jquery.placeholder.js"></script><script src="javascripts/jquery.foundation.alerts.js"></script><script src="javascripts/jquery.foundation.topbar.js"></script><script src="javascripts/jquery.foundation.joyride.js"></script>
+  -->
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script> 
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+  <script src="javascripts/jquery.jqplot.min.js"></script>
+  <script src="javascripts/jqplot.barRenderer.min.js"></script>
+  <script src="javascripts/jqplot.pieRenderer.min.js"></script>
+
+
+<script>
+var compare_data;
+var query;
+$.getJSON("average.json",function(data){compare_data=data;});
+
+var result_names = {'downs':'Turnover on Downs','fg':'Field Goal','fumble':'Fumble',
+'half':'Halftime','int':'Interception','loss':'Game Over (Loss)','miss':'Missed Field Goal',
+'ot':'Overtime','other':'Unknown','punt':'Punt','td':'Touchdown','win':'Game Over (Win)'};
+
+//handle button click
+function go() {
+    $("#go-button")[0].disabled = true;
+    $("#content").empty();
+    $("#content").append("<p style='text-align:center'><img src='images/ajax-loader.gif' \x2F\x3E</p>");
+    query = {};
+    fields = ['from','to','off','def','time','score','down','togo','name'];
+    for(i=0;i<fields.length;i++) {
+        f = fields[i];
+        query[f] = $('#'+f).val();
+    }
+    var j = $.getJSON("football.php",query,function(data) {
+        if(data.plays.length == 0) {
+            $("#go-button")[0].disabled = false;
+            $("#content").empty();
+            $("#content").append("<h4 style='text-align:center'>No plays meet your criteria. Try a different search.</h4>");
+        } else {
+            var d = transform(data);
+            var d2 = transform(compare_data);
+            $("#go-button")[0].disabled = false;
+            $("#content").empty();
+            display(d,d2);
+            play_chart('chart1',[d.run_hist],d.run_max);
+            play_chart('chart2',[d.pass_hist],d.pass_max);
+            if($('#down').val() == 0 && $('#togo').val() == 0) {
+                drive_chart([d.pie]);
+            }
+        }
+    });
+    j.error(function() {
+        $("#go-button")[0].disabled = false;
+        $("#content").empty();
+        $("#content").append("<h4 style='text-align:center'>An error occurred. Please try again.</h4>");
+    });
+    return true;
+}
+
+function transform(raw) {
+    var d = {};
+    pass_count = raw.plays[0].plays;
+    pass_success = raw.plays[0].success;
+    run_count = raw.plays[1].plays;
+    run_success = raw.plays[1].success;
+    play_count = parseInt(pass_count) + parseInt(run_count);
+    d.pass_sel = pass_count/play_count*100.0;
+    d.pass_count = pass_count;
+    d.run_sel = run_count/play_count*100.0;
+    d.run_count = run_count;
+    d.pass_suc = pass_success/pass_count*100.0;
+    d.run_suc = run_success/run_count*100.0;
+    //pass hist
+    pass_hist = [];
+    run_hist = [];
+    pmax=10;pmax2=10;rmax=10;
+    for(i=0;i<raw.yards.length;i++) {
+        if(raw.yards[i].type == 'pass') {
+            pass_hist.push([raw.yards[i].yards, raw.yards[i].c]);
+            if(parseInt(raw.yards[i].c)>pmax) {pmax2=pmax; pmax = parseInt(raw.yards[i].c);}
+        } else {
+            run_hist.push([raw.yards[i].yards, raw.yards[i].c]);
+            if(parseInt(raw.yards[i].c)>rmax) rmax = parseInt(raw.yards[i].c);
+        }
+    }
+    d.pass_hist = pass_hist;
+    d.run_hist = run_hist;
+    d.pass_max = pmax2*4;
+    d.run_max = rmax;
+    if($('#down').val() == 0 && $('#togo').val() == 0) {
+        var drives = {};
+        var pie = [];
+        var total = 0;
+        for(i=0;i<raw.results.length;i++){
+          drives[raw.results[i].r] = {count:parseInt(raw.results[i].c)};
+          total += drives[raw.results[i].r].count
+        }
+        for(drive in drives) {
+          drives[drive].percent = drives[drive].count/total*100.0;
+          drives[drive].label = result_names[drive];
+          pie.push([drives[drive].label,drives[drive].percent]);
+        }
+        pie.sort(function(a,b) {return b[1] - a[1]; });
+        //combine 6th->end into 'Other'
+        if(pie.length > 6) {
+            var other = 0;
+            for(i=5;i<pie.length;i++) {
+                other += pie[i][1];
+            }
+            pie = pie.slice(0,5);
+            pie.push(['Other',other]);
+        }
+        d.results = drives;
+        d.drive_count = total;
+        d.pie = pie;
+    }
+    return d;
+}
+
+function display(data1, data2) {
+    x = $("#content"); row = "";
+    x.append("<p id='link'><a href='javascript:link()'>link to these stats</a></p>");
+    if($('#name').val().length>0) x.append("<h2>" + $('#name').val() + "</h2>");
+    //play stats
+    x.append("<h3>Play Statistics</h3>\n");
+    //run selection
+    s = data1.run_sel.toFixed(1) + "%";
+    if('run_sel' in data2) s += disp_diff_gray(data1.run_sel, data2.run_sel);
+    row += ('<div class="row"><div class="three columns"><h5 class="subheader">Run Play Selection</h5><h4>'+s+"<br><small>"+data1.run_count+' plays</small></h4></div>');
+    
+    //run success
+    s = data1.run_suc.toFixed(1) + "%";
+    if('run_suc' in data2) s += disp_diff(data1.run_suc, data2.run_suc);
+    row += ('<div class="three columns"><h5 class="subheader">Run Success Rate</h5><h4>'+s+'</h4></div>');
+    //plot placeholder
+    row += ('<div class="six columns"><h5 class="subheader">Run Yardage Summary</h5><div id="chart1" style="width:100%;height:120px"></div></div></div>');
+    x.append(row); row = "";
+    
+    //pass
+    s = data1.pass_sel.toFixed(1) + "%";
+    if('pass_sel' in data2) s += disp_diff_gray(data1.pass_sel, data2.pass_sel);
+    row += ('<div class="row"><div class="three columns"><h5 class="subheader">Pass Play Selection</h5><h4>'+s+"<br><small>"+data1.pass_count+' plays</small></h4></div>');
+    
+    //pass success
+    s = data1.pass_suc.toFixed(1) + "%";
+    if('pass_suc' in data2) s += disp_diff(data1.pass_suc, data2.pass_suc);
+    row += ('<div class="three columns"><h5 class="subheader">Pass Success Rate</h5><h4>'+s+'</h4></div>');
+    //plot placeholder
+    row += ('<div class="six columns"><h5 class="subheader">Pass Yardage Summary</h5><div id="chart2" style="width:100%;height:120px"></div></div></div>');
+    x.append(row);
+    
+    if($('#down').val() == 0 && $('#togo').val() == 0) {
+        row = '<h3>Drive Statistics</h3><p>The '+data1.drive_count+' drives in this dataset had the following outcomes:</p><ul>';
+        for(driveEnd in data1.results) {
+            s = "";
+            if('results' in data2 && driveEnd in data2.results) {
+                s = disp_diff(data1.results[driveEnd].percent,data2.results[driveEnd].percent);
+            }
+            row += '<li>'+data1.results[driveEnd].label+': <b>'+data1.results[driveEnd].percent.toFixed(1)+'%</b> ('+data1.results[driveEnd].count+' drives)'+s+'</li>';
+        }
+        row += '</ul><div id="pie" style="width:100%;height:450px"></div>';
+        x.append(row);
+    } else {
+        x.append('<p>Select "All Downs" and "All Yards" for Drive Statistics.</p>');
+    }
+}
+
+function disp_diff(n1, n2) {
+    diff = n1 - n2;
+    s = diff.toFixed(1);
+    if(diff > 0) s = "+" + s;
+    if(diff > 0) {
+        s = ' <span class="success label">' + s + '%</span>';
+    } else if (diff == 0) {
+        s = ' <span class="secondary label">' + s + '%</span>';
+    } else {
+        s = ' <span class="alert label">' + s + '%</span>';
+    }
+    return s;
+}
+
+function disp_diff_gray(n1, n2) {
+    diff = n1 - n2;
+    s = diff.toFixed(1);
+    if(diff > 0) s = "+" + s;
+    return ' <span class="secondary label">' + s + '%</span>';
+}
+
+function play_chart(chart, data, max_val) {
+    $.jqplot(chart, data, {
+        seriesDefaults:{
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions: {fillToZero: true,barMargin:0,barWidth:5},
+        },
+        axes: { xaxis: {label:'Yardage',min:-5,max:20}, yaxis: {label:'Plays',min:0,max:max_val} }
+    });
+}
+
+function drive_chart(data) {
+    $.jqplot ('pie', data, 
+        { 
+          seriesDefaults: {
+            // Make this a pie chart.
+            renderer: $.jqplot.PieRenderer, 
+            rendererOptions: {
+              // Put data labels on the pie slices.
+              // By default, labels show the percentage of the slice.
+              showDataLabels: true
+            }
+          }, 
+          legend: { show:true, location: 's', rendererOptions:{ numberColumns:3 }}
+        }
+      );
+};
+
+function link() {
+    $('#link').html( '<input id="link-box" type="text" width=30>' );
+    $('#link-box').val("http://football.10flow.com/#" + 
+    [$('#from').val(),$('#to').val(),$('#off').val(),$('#def').val(),$('#time').val(),
+    $('#score').val(),$('#down').val(),$('#togo').val(),$('#name').val().replace(/ /g,"_")].join("|") );
+}
+
+if(location.hash.length > 1) {
+    var h = location.hash.substr(1);
+    var vars = h.split('|');
+    $('#from').val(vars[0]);
+    $('#to').val(vars[1]);
+    $('#off').val(vars[2]);
+    $('#def').val(vars[3]);
+    $('#time').val(vars[4]);
+    $('#score').val(vars[5]);
+    $('#down').val(vars[6]);
+    $('#togo').val(vars[7]);
+    $('#name').val(vars[8].replace(/_/g," "));
+    $('html, body').animate({
+         scrollTop: $("#content").offset().top
+     }, 1000);
+}
+go();
+</script>
+
+</body>
+</html>
