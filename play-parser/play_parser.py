@@ -11,7 +11,7 @@ csv_list.sort()
 
 #output files
 output_json_filename = None #filename or None
-output_csv_filename = None #filename or None
+output_csv_filename = "output.csv" #filename or None
 
 #database options
 
@@ -19,13 +19,13 @@ output_csv_filename = None #filename or None
 #database_engine = None
 
 #For SQLAlchemy database, uncomment these lines:
-from plays_db import Base, ingest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+#from plays_db import Base, ingest
+#from sqlalchemy import create_engine
+#from sqlalchemy.orm import sessionmaker
 
-create_table = True #or False
+#create_table = False #or False
 #connection string format: mysql+mysqldb://<user>:<password>@<host>/<dbname>
-database_engine = create_engine('mysql+mysqldb://root:password@localhost/playtest', echo=False)
+#database_engine = create_engine('mysql+mysqldb://root:password@localhost/playtest', echo=False)
 
 ### END CONFIGURATION ###
 
@@ -74,11 +74,11 @@ if output_csv_filename is not None:
             writer.writerow(play)
     
 #database ingest
-if database_engine is not None:
-    print 'Writing to database (this will take a while)...'
-    if create_table:
-        Base.metadata.create_all(database_engine)
-    Session = sessionmaker(bind=database_engine)
-    session = Session()
-    ingest(plays, session)
+#if database_engine is not None:
+#    print 'Writing to database (this will take a while)...'
+#    if create_table:
+#        Base.metadata.create_all(database_engine)
+#    Session = sessionmaker(bind=database_engine)
+#    session = Session()
+#    ingest(plays, session)
     
