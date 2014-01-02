@@ -19,20 +19,23 @@ class PlayData:
         columns['offscore'] = to_num(raw_row['offscore'])
         columns['defscore'] = to_num(raw_row['defscore'])
         columns['ydline'] = to_num(raw_row['ydline'])
-        columns['description'] = raw_row['description']
-        
+        #columns['description'] = raw_row['description']
+        columns['description'] = unicode(raw_row['description'],
+            errors='ignore')
+
         #store some helpful information
         columns['scorediff'] = columns['offscore'] - columns['defscore']
         self.columns = columns
         self.desc_lower = columns['description'].lower()
         self.desc_words = self.desc_lower.split(" ")
-        
-    def next_play_data_factory(self,raw_row):
+
+    def next_play_data_factory(self, raw_row):
         new_play = PlayData(raw_row)
         new_play.last = self
         self.last = None
         return new_play
-    
+
+
 def to_num(s, default=0):
     if s.isdigit():
         return int(s)
